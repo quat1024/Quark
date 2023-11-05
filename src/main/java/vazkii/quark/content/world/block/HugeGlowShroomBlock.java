@@ -1,8 +1,7 @@
 package vazkii.quark.content.world.block;
 
-import java.util.function.BooleanSupplier;
-
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,34 +13,30 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HugeMushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import vazkii.quark.base.Quark;
-import vazkii.quark.base.block.IQuarkBlock;
-import vazkii.quark.base.handler.CreativeTabHandler;
 import vazkii.quark.base.handler.MiscUtil;
-import vazkii.zeta.module.ZetaModule;
+import vazkii.zeta.block.ZetaHugeMushroomBlock;
+import vazkii.zeta.block.ZetaBlockProps;
+import vazkii.zeta.event.ZRegister;
 import vazkii.quark.content.world.module.GlimmeringWealdModule;
 
-public class HugeGlowShroomBlock extends HugeMushroomBlock implements IQuarkBlock {
+public class HugeGlowShroomBlock extends ZetaHugeMushroomBlock {
 
-	private final ZetaModule module;
-	private final boolean glowing;
+	public boolean glowing;
 
-	public HugeGlowShroomBlock(String name, ZetaModule module, final boolean glowing) {
-		super(Block.Properties.copy(Blocks.RED_MUSHROOM_BLOCK)
-				.lightLevel(b -> glowing ? 12 : 0)
-				.hasPostProcess((a,b,c)-> glowing).emissiveRendering((a,b,c)-> glowing)
-				.randomTicks()
-				.noOcclusion());
+	public HugeGlowShroomBlock(@Nullable ZRegister event, boolean glowing, ZetaBlockProps props) {
+		super(event, props
+			.copy(Blocks.RED_MUSHROOM_BLOCK)
+			.tab(CreativeModeTab.TAB_DECORATIONS)
+			.lightLevel(glowing ? 12 : 0)
+			.hasPostProcess()
+			.emissiveRendering()
+			.randomTicks()
+			.noOcclusion());
 
-		this.module = module;
 		this.glowing = glowing;
-
-		Quark.ZETA.registry.registerBlock(this, name, true);
-		CreativeTabHandler.addTab(this, CreativeModeTab.TAB_DECORATIONS);
 	}
 
 	@Override
@@ -130,21 +125,6 @@ public class HugeGlowShroomBlock extends HugeMushroomBlock implements IQuarkBloc
 
 			return true;
 		}
-	}
-
-	@Override
-	public ZetaModule getModule() {
-		return module;
-	}
-
-	@Override
-	public IQuarkBlock setCondition(BooleanSupplier condition) {
-		return this;
-	}
-
-	@Override
-	public boolean doesConditionApply() {
-		return true;
 	}
 
 }

@@ -89,17 +89,16 @@ public class GlimmeringWealdModule extends ZetaModule {
 
 	@LoadEvent
 	public final void register(ZRegister event) {
-		glow_shroom = new GlowShroomBlock(this);
-		glow_lichen_growth = new GlowLichenGrowthBlock(this);
-		glow_shroom_block = new HugeGlowShroomBlock("glow_shroom_block", this, true);
-		glow_shroom_stem = new HugeGlowShroomBlock("glow_shroom_stem", this, false);
+		glow_shroom = new GlowShroomBlock(event, props("glow_shroom"));
+		glow_lichen_growth = new GlowLichenGrowthBlock(event, props("glow_lichen_growth"));
+		glow_shroom_block = new HugeGlowShroomBlock(event, true, props("glow_shroom_block"));
+		glow_shroom_stem = new HugeGlowShroomBlock(event, false, props("glow_shroom_stem"));
 		glow_shroom_ring = new GlowShroomRingBlock(this);
 
 		VariantHandler.addFlowerPot(glow_lichen_growth, "glow_lichen_growth", prop -> prop.lightLevel((state) -> 8));
 		VariantHandler.addFlowerPot(glow_shroom, "glow_shroom", prop -> prop.lightLevel((state) -> 10));
 
 		makeFeatures();
-
 
 	}
 

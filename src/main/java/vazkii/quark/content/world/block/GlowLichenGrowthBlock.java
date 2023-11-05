@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 
@@ -23,19 +24,21 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import vazkii.quark.base.block.QuarkBushBlock;
 import vazkii.quark.base.handler.MiscUtil;
-import vazkii.zeta.module.ZetaModule;
+import vazkii.zeta.block.ZetaBushBlock;
+import vazkii.zeta.block.ZetaBlockProps;
+import vazkii.zeta.event.ZRegister;
 
-public class GlowLichenGrowthBlock extends QuarkBushBlock implements BonemealableBlock {
+public class GlowLichenGrowthBlock extends ZetaBushBlock implements BonemealableBlock {
 
 	protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
 
-	public GlowLichenGrowthBlock(ZetaModule module) {
-		super("glow_lichen_growth", module, CreativeModeTab.TAB_DECORATIONS,
-				Properties.copy(Blocks.GLOW_LICHEN)
-				.randomTicks()
-				.lightLevel(s -> 8));
+	public GlowLichenGrowthBlock(@Nullable ZRegister event, ZetaBlockProps props) {
+		super(event, props
+			.copy(Blocks.GLOW_LICHEN)
+			.tab(CreativeModeTab.TAB_DECORATIONS)
+			.randomTicks()
+			.lightLevel(8));
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package vazkii.quark.content.world.block;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -17,18 +18,20 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import vazkii.quark.base.block.QuarkBushBlock;
-import vazkii.zeta.module.ZetaModule;
+import vazkii.zeta.block.ZetaBushBlock;
+import vazkii.zeta.block.ZetaBlockProps;
+import vazkii.zeta.event.ZRegister;
 
-public class GlowShroomBlock extends QuarkBushBlock implements BonemealableBlock {
+public class GlowShroomBlock extends ZetaBushBlock implements BonemealableBlock {
 
 	protected static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 6.0D, 11.0D);
 
-	public GlowShroomBlock(ZetaModule module) {
-		super("glow_shroom", module, CreativeModeTab.TAB_DECORATIONS,
-				Properties.copy(Blocks.RED_MUSHROOM)
-				.randomTicks()
-				.lightLevel(s -> 10));
+	public GlowShroomBlock(@Nullable ZRegister event, ZetaBlockProps props) {
+		super(event, props
+			.copy(Blocks.RED_MUSHROOM)
+			.tab(CreativeModeTab.TAB_DECORATIONS)
+			.randomTicks()
+			.lightLevel(10));
 	}
 
 	@Override

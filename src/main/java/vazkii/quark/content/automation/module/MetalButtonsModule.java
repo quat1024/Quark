@@ -22,8 +22,8 @@ public class MetalButtonsModule extends ZetaModule {
 
 	@LoadEvent
 	public final void register(ZRegister event) {
-		iron_button = new MetalButtonBlock("iron_button", this, 100).setCondition(() -> enableIron);
-		gold_button = new MetalButtonBlock("gold_button", this, 4).setCondition(() -> enableGold);
+		iron_button = new MetalButtonBlock(event, 100, props("iron_button").condition(() -> enableIron));
+		gold_button = new MetalButtonBlock(event, 4  , props("gold_button").condition(() -> enableGold));
 	}
 	
 }

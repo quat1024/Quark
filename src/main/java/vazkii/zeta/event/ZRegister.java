@@ -11,7 +11,11 @@ import vazkii.zeta.registry.ZetaRegistry;
 public class ZRegister implements IZetaLoadEvent {
 	public final Zeta zeta;
 
+	@Deprecated
+	public static ZRegister SHITTY_SINGLETON_TODO_THREAD_THE_EVENT_THROUGH;
+
 	public ZRegister(Zeta zeta) {
+		SHITTY_SINGLETON_TODO_THREAD_THE_EVENT_THROUGH = this;
 		this.zeta = zeta;
 	}
 

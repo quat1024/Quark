@@ -7,6 +7,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import vazkii.zeta.Zeta;
+import vazkii.zeta.block.ZetaBlockProps;
 import vazkii.zeta.event.ZGatherHints;
 import vazkii.zeta.event.bus.PlayEvent;
 
@@ -24,6 +25,15 @@ public class ZetaModule {
 	public boolean enabledByDefault = false;
 	public boolean disabledByOverlap = false;
 	public boolean ignoreAntiOverlap = false;
+
+	//Purely for syntactic convenience
+	public final ZetaBlockProps props() {
+		return new ZetaBlockProps(this);
+	}
+
+	public final ZetaBlockProps props(String id) {
+		return new ZetaBlockProps(this).id(id);
+	}
 
 	public void postConstruct() {
 		// NO-OP
